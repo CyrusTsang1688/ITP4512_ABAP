@@ -1,0 +1,33 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_LAB3_BALANCE                                              *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+*&                                                                     *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+
+REPORT  Z_LAB3_BALANCE
+                          .
+DATA total TYPE i.
+
+DATA DA TYPE sy-datum.
+
+total = 1000.
+
+WRITE (22) 'Trial Balance' CENTERED.
+
+ULINE AT /(24).
+
+WRITE: /(10)'Accounts',(5)'Dr',(5)'Cr'.
+
+WRITE: /(10)'Cash',(5)'1000'.
+
+WRITE: /(10)'Payable',(5)' ',(5)'1000'.
+
+ULINE AT /(24).
+
+SKIP.
+
+WRITE: /(10)'TOTAL',(5)total,(5)total.
+
+WRITE :/ sy-uname,(10)sy-datum.

@@ -1,0 +1,44 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_LAB3_LOOP                                                 *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+*&                                                                     *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+
+REPORT  Z_LAB3_LOOP.
+
+DATA: n1 TYPE i,
+      n2 TYPE i VALUE 1,
+      n3 type i.
+
+WRITE: / 'Mathematical Statment',
+        30 'Value'.
+
+ULINE.
+DO 10 TIMES.
+    CHECK sy-index < 8.
+    n3 = sy-index.
+    CASE n3.
+        WHEN 2.
+            WRITE: / 'Square of', 15(7) n3, 'is'.
+            n1 = sy-index * 2.
+        WHEN 4.
+            WRITE: / 'Square root of', 15(7) n3, 'is'.
+            n1 = SQRT( n3 ).
+        WHEN 6.
+            WRITE: / 'Sum of 1 to ', 15(7) n3, 'is'.
+                n1 = 0.
+                WHILE n2 <= n3.
+                    ADD n2 TO n1.
+                    ADD 1 TO n2.
+                ENDWHILE.
+        WHEN OTHERS.
+            WRITE: / 'Factorial of', 15(7) n3, 'is'.
+            n1 = 1.
+            DO n3 TIMES.
+                MULTIPLY n1 BY SY-INDEX.
+            ENDDO.
+    ENDCASE.
+    WRITE (8) n1 UNDER 'Value'.
+ENDDO.
