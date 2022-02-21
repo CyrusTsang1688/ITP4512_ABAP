@@ -4,4 +4,27 @@ SASA ENJOY JAVA
 A=B/X    X=Y*
   234-10
   
-Program Code.
+Program Code:
+
+*&---------------------------------------------------------------------*
+*& Report  Z_Q3                                                        *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+*&REPORT YET_IT_OK.                                                    *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+
+REPORT  Z_Q3                                    .
+
+Data a(9) type c VALUE 'WONDERFUL'.
+Write: / a, 3 a(3), a(3), 3 '$', 6 '#A'.
+Write: /3(2) 'SANDY', 1(2) 'HATES', 1(2) 'SAP'.
+Write: 6 'ENJOY', 'JAVA'.
+Data: W type i VALUE 10, Y type i VALUE 4, Z type i VALUE 1.
+Data n(5) type c VALUE 'X=Y*Z'.
+Data m(6) type c VALUE 'Y=W/X'.
+Write AT /W(Y) n.
+Write: 1 m, 1 'A', 3 'B'.
+DATA k Type i value '-234'.
+WRITE /(4) k UNDER 'B' no-gap.
+WRITE (2) W.
