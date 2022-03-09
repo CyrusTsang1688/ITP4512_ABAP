@@ -1,0 +1,24 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_05_SELECT                                                 *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+*&                                                                     *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+
+REPORT  Z_05_SELECT.
+
+TABLES ZCUST.
+DATA wa_cust TYPE ZCUST.
+
+WRITE: / 'Cust ID  ', 'First Name  ', 'Last Name  ', 'Sales Value  '.
+
+SELECT * FROM ZCUST INTO wa_cust
+      WHERE del_flag <> 'X'.
+
+  WRITE: / wa_cust-kunnr UNDER 'Cust ID  ',
+           wa_cust-fname UNDER 'First Name  ',
+           wa_cust-lname UNDER 'Last Name  ',
+           wa_cust-sales_val UNDER 'Sales Value  '.
+
+ENDSELECT.

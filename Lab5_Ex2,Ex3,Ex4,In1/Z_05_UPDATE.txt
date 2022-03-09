@@ -1,0 +1,34 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_05_UPDATE                                                 *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+*&                                                                     *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+
+REPORT  Z_05_UPDATE                             .
+
+TABLES ZCUST.
+DATA wa_cust TYPE ZCUST.
+
+
+WRITE: / 'Cust ID  ', 'First Name  ', 'Last Name  ', 'Sales Value  ' ,
+'Modification date  '.
+
+wa_cust-mod_date = SY-DATUM.
+wa_cust-sales_val = 123456.
+wa_cust-kunnr = '0000012346'.
+
+UPDATE ZCUST SET MOD_DATE = wa_cust-mod_date
+             SALES_VAL = wa_cust-sales_val
+             WHERE KUNNR = wa_cust-kunnr.
+
+SELECT * FROM ZCUST INTO wa_cust.
+
+  WRITE: / wa_cust-kunnr UNDER 'Cust ID  ',
+           wa_cust-fname UNDER 'First Name  ',
+           wa_cust-lname UNDER 'Last Name  ',
+           wa_cust-sales_val UNDER 'Sales Value  ',
+           wa_cust-mod_date UNDER 'Modification date  '.
+
+ENDSELECT.

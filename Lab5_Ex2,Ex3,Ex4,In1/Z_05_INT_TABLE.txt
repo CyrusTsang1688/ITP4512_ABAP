@@ -1,0 +1,47 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_05_INT_TABLE                                              *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+*&                                                                     *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+
+REPORT  Z_05_INT_TABLE.
+
+TYPES: BEGIN OF int_rec,
+          customer TYPE c LENGTH 5,
+          lname    TYPE c LENGTH 15,
+          fname    TYPE c LENGTH 15,
+      END OF int_rec.
+
+DATA: int_tab TYPE TABLE OF int_rec,
+      int_wa  TYPE int_rec.
+
+int_wa-customer = '12345'.
+int_wa-lname = 'Porter'.
+int_wa-fname = 'John'.
+APPEND int_wa TO int_tab.
+
+int_wa-customer = '12346'.
+int_wa-lname = 'Porter'.
+int_wa-fname = 'May'.
+APPEND int_wa TO int_tab.
+
+int_wa-customer = '12347'.
+int_wa-lname = 'Carter'.
+int_wa-fname = 'John'.
+APPEND int_wa TO int_tab.
+
+int_wa-customer = '12348'.
+int_wa-lname = 'Carter'.
+int_wa-fname = 'Peter'.
+APPEND int_wa TO int_tab.
+
+WRITE: / 'Customer', 'Last Name', 'First Name'.
+ULINE.
+
+LOOP AT int_tab INTO int_wa.
+  WRITE: / int_wa-customer UNDER 'Customer ',
+           int_wa-lname UNDER 'Last Name ',
+           int_wa-fname UNDER 'First Name '.
+ENDLOOP.
