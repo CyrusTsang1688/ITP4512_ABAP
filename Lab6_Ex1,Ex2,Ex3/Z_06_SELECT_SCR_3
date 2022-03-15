@@ -1,0 +1,61 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_06_SELECT_SCR_3                                           *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+*&                                                                     *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+
+REPORT Z_06_SELECT_SCR_3.
+
+TABLES SBOOK.
+TABLES SPFLI.
+SELECTION-SCREEN BEGIN OF BLOCK OPTIONS WITH FRAME TITLE OP1.
+    PARAMETERS r1 RADIOBUTTON GROUP gr1.
+    PARAMETERS r2 RADIOBUTTON GROUP gr1 DEFAULT 'X'.
+    PARAMETERS r3 RADIOBUTTON GROUP gr1.
+    SELECT-OPTIONS s_carrid FOR sbook-carrid.
+    SELECT-OPTIONS s_connid FOR sbook-connid NO INTERVALS.
+    SELECT-OPTIONS s_fldate FOR sbook-fldate NO INTERVALS DEFAULT
+    sy-datum.
+
+SELECTION-SCREEN END OF BLOCK OPTIONS.
+
+TYPES: BEGIN OF REC,
+       CARRID   TYPE SBOOK-CARRID,
+       CONNID   TYPE SBOOK-CONNID,
+       CITYFROM TYPE SPFLI-CITYFROM,
+       CITYTO   TYPE SPFLI-CITYTO,
+       FLDATE   TYPE SBOOK-FLDATE,
+       CLASS    TYPE SBOOK-CLASS,
+       END OF REC.
+
+DATA WA TYPE REC.
+DATA ITAB TYPE TABLE OF REC.
+DATA CLS TYPE SBOOK-CLASS.
+
+IF R1 = 'X'.
+    CLS = 'B'.
+ELSEIF R2 = 'X'.
+    CLS = 'Y'.
+ELSE.
+    CLS = 'F'.
+ENDIF.
+
+SELECT SBOOK~CARRID SBOOK~CONNID CITYFROM CITYTO FLDATE CLASS
+    INTO TABLE ITAB
+    FROM SBOOK INNER JOIN SPFLI
+            ON SBOOK~CARRID = SPFLI~CARRID
+            AND SBOOK~CONNID = SPFLI~CONNID
+    WHERE SBOOK~CARRID IN S_CARRID
+        AND SBOOK~CONNID IN S_CONNID
+*       AND FLDATE IN S_FLDATE
+        AND CLASS = CLS.
+
+LOOP AT ITAB INTO WA.
+    WRITE: / WA-CARRID, WA-CONNID, WA-CITYFROM, WA-CITYTO, WA-FLDATE,
+WA-CLASS.
+ENDLOOP.
+
+INITIALIZATION.
+    OP1 = 'Options'.
