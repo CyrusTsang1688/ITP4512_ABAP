@@ -1,0 +1,21 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_07_MESSAGE                                                *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+*&                                                                     *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+
+REPORT  Z_07_MESSAGE MESSAGE-ID z_message.
+
+TABLES spfli.
+
+SELECT-OPTIONS airline for spfli-carrid.
+
+SELECT * FROM spfli WHERE carrid IN airline.
+  WRITE: / spfli-carrid, spfli-connid.
+ENDSELECT.
+
+IF sy-subrc = 4.
+  MESSAGE i002 WITH 'SPFLi'.
+ENDIF.
