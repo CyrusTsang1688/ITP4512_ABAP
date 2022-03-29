@@ -1,0 +1,32 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_07_SB_DIVIDE                                              *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+*&                                                                     *
+*&                                                                     *
+*&---------------------------------------------------------------------*
+
+REPORT  Z_07_SB_DIVIDE.
+
+PARAMETERS NUMBER1 TYPE I.
+PARAMETERS NUMBER2 TYPE I.
+DATA RESULT TYPE F.
+DATA P_RESULT TYPE P DECIMALS 2.
+
+PERFORM DIVIDE_NUM USING NUMBER1 NUMBER2
+                   CHANGING RESULT.
+
+
+MOVE RESULT TO P_RESULT.
+WRITE: / 'RESULT:', P_RESULT.
+
+
+FORM DIVIDE_NUM USING N1 TYPE I
+                      N2 TYPE I
+                CHANGING R1 TYPE F.
+  IF N2 = 0.
+    MESSAGE I005(Z_MESSAGE_B).
+  ELSE.
+    R1 = N1 / N2.
+  ENDIF.
+ENDFORM.
