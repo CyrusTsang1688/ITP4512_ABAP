@@ -1,0 +1,21 @@
+FUNCTION Z_DIVIDE_CHECK.
+*"----------------------------------------------------------------------
+*"*"Local interface:
+*"  IMPORTING
+*"     REFERENCE(NUM1) TYPE  I
+*"     REFERENCE(NUM2) TYPE  I
+*"  EXPORTING
+*"     REFERENCE(RES) TYPE  F
+*"  EXCEPTIONS
+*"      ZERO_NUMBER
+*"----------------------------------------------------------------------
+
+IF num2 EQ 0.
+  RAISE zero_number.
+ELSE.
+  res = num1 / num2.
+ENDIF.
+
+
+
+ENDFUNCTION.

@@ -1,0 +1,15 @@
+FUNCTION Z_FM_DIVIDE.
+*"----------------------------------------------------------------------
+*"*"Local interface:
+*"  IMPORTING
+*"     REFERENCE(NUM1) TYPE  I
+*"     REFERENCE(NUM2) TYPE  I
+*"  EXPORTING
+*"     REFERENCE(RES) TYPE  F
+*"----------------------------------------------------------------------
+
+IF N2 <> 0.
+        R1 = N1 / N2.
+    ENDIF.
+
+ENDFUNCTION.
